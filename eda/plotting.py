@@ -45,7 +45,7 @@ def plot_boxplots_and_outliers(df: pd.DataFrame):
     plt.show()
 
 
-def plot_numeric_distributions(df: pd.DataFrame):
+def plot_numeric_distributions(df: pd.DataFrame, only_columns=None):
     """
     Plots histograms (distributions) for all numeric columns in a DataFrame using Seaborn.
 
@@ -53,6 +53,9 @@ def plot_numeric_distributions(df: pd.DataFrame):
     - df (pd.DataFrame): The DataFrame to analyze.
     """
     numeric_cols = df.select_dtypes(include="number").columns
+
+    if only_columns:
+        numeric_cols = [col for col in numeric_cols if col in only_columns]
 
     n_cols = 2
     n_rows = (len(numeric_cols) + 1) // n_cols
